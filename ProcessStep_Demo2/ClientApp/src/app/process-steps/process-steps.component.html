@@ -1,0 +1,31 @@
+<h1>Process Steps</h1>
+
+<p *ngIf="!(processSteps$ | async)"><em>Loading...</em></p>
+<p>
+  <a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">New Steps</a>
+</p>
+
+<table class="table table-sm table-hover" *ngIf="(processSteps$ | async)?.length>0">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Active</th>
+      <th>LastUpdated</th>
+      <th>LastUpdateBy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let processStep of (processSteps$ | async)">
+      <td>{{ processStep.stepID }}</td>
+      <td>{{ processStep.stepName }}</td>
+      <td>{{ processStep.description }}</td>
+      <td>{{ processStep.isActive }}</td>
+      <td>{{ processStep.lastUpdated | date: "dd.MM.y" }}</td>
+      <td>{{ processStep.lastUpdatedBy }}</td>
+      <!--<td><a [routerLink]="['/procsteps/sss/', processStep.stepID]" class="btn btn-primary btn-sm float-right">Edit</a></td>-->
+      <td><a [routerLink]="" (click)="delete(processStep.stepID)" class="btn btn-danger btn-sm float-right">Delete</a></td>
+    </tr>
+  </tbody>
+</table>
